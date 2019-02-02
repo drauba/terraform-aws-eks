@@ -66,7 +66,7 @@ locals {
       # This will launch an autoscaling group with only On-Demand instances
       instance_type        = "t2.nano"
       additional_userdata  = "echo foo bar"
-      subnets              = "${join(",", module.vpc.private_subnets)}"
+      subnets              = "${join(",", data.terraform_remote_state.vpc.private_subnets)}"
       asg_desired_capacity = "2"
     },
   ]
@@ -75,7 +75,7 @@ locals {
       # This will launch an autoscaling group with only Spot Fleet instances
       instance_type                            = "t2.nano"
       additional_userdata                      = "echo foo bar"
-      subnets                                  = "${join(",", module.vpc.private_subnets)}"
+      subnets                                  = "${join(",", data.terraform_remote_state.vpc.private_subnets)}"
       additional_security_group_ids            = "${aws_security_group.worker_group_mgmt_one.id},${aws_security_group.worker_group_mgmt_two.id}"
       override_instance_type                   = "t2.micro"
       asg_desired_capacity                     = "2"
