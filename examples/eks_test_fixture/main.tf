@@ -146,7 +146,9 @@ resource "aws_security_group" "all_worker_mgmt" {
 }
 
 module "eks" {
-  source                               = "../.."
+  source  = "app.terraform.io/meta7poc/eks/aws"
+  version = "2.1.0"
+  manage_aws_auth                      = "false"
   cluster_name                         = "${local.cluster_name}"
   subnets                              = ["${data.terraform_remote_state.vpc.private_subnets}"]
   tags                                 = "${local.tags}"
