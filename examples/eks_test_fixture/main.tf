@@ -77,7 +77,6 @@ locals {
       additional_userdata                      = "echo foo bar"
       subnets                                  = "${join(",", data.terraform_remote_state.vpc.private_subnets)}"
       additional_security_group_ids            = "${aws_security_group.worker_group_mgmt_one.id},${aws_security_group.worker_group_mgmt_two.id}"
-      override_instance_type                   = "a1.medium"
       asg_desired_capacity                     = "2"
       spot_instance_pools                      = 10
       on_demand_percentage_above_base_capacity = "0"
