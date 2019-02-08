@@ -144,6 +144,15 @@ resource "aws_security_group" "all_worker_mgmt" {
   }
 }
 
+data "template_file" "user_data_consul" {
+  template = "${file("${path.module}/user-data-consul.sh")}"
+
+  vars {
+    consul_cluster_tag_key   = "${var.consul_cluster_tag_key}"
+    consul_cluster_tag_value = "${var.consul_cluster_name}"
+  }
+}
+
 module "eks" {
   source  = "app.terraform.io/meta7poc/eks/aws"
   version = "2.1.0"
