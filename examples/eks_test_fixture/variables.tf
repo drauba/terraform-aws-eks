@@ -60,3 +60,13 @@ variable "map_users_count" {
   type        = "string"
   default     = 2
 }
+
+variable "consul_cluster_tag_key" {
+  description = "The tag the Consul EC2 Instances will look for to automatically discover each other and form a cluster."
+  default     = "consul-servers"
+}
+
+variable "consul_cluster_name" {
+  description = "What to name the Consul server cluster and all of its associated resources"
+  default     = "consul-example"
+}
