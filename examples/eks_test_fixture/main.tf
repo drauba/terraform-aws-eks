@@ -65,7 +65,7 @@ locals {
     {
       # This will launch an autoscaling group with only On-Demand instances
       instance_type        = "t2.nano"
-      additional_userdata  = "echo foo bar"
+      additional_userdata  = "${data.template_file.user_data_consul.rendered}"
       subnets              = "${join(",", data.terraform_remote_state.vpc.private_subnets)}"
       asg_desired_capacity = "2"
     },
@@ -74,7 +74,7 @@ locals {
     {
       # This will launch an autoscaling group with only Spot Fleet instances
       instance_type                            = "t2.micro"
-      additional_userdata                      = "echo foo bar"
+      additional_userdata                      = "${data.template_file.user_data_consul.rendered}"
       subnets                                  = "${join(",", data.terraform_remote_state.vpc.private_subnets)}"
       additional_security_group_ids            = "${aws_security_group.worker_group_mgmt_one.id},${aws_security_group.worker_group_mgmt_two.id}"
       asg_desired_capacity                     = "2"
@@ -86,6 +86,7 @@ locals {
     Environment = "test"
     GithubRepo  = "terraform-aws-eks"
     GithubOrg   = "terraform-aws-modules"
+    "${var.consul_cluster_tag_key}" = "${var.consul_cluster_name}"
   }
 }
 
