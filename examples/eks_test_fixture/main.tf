@@ -86,7 +86,7 @@ locals {
     Environment = "test"
     GithubRepo  = "terraform-aws-eks"
     GithubOrg   = "terraform-aws-modules"
-    consul-cluster = "${var.consul_cluster_tag_key}" = "${var.consul_cluster_name}"
+    consul-cluster = "${var.consul_cluster_name}"
   }
 }
 
