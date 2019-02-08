@@ -86,7 +86,6 @@ locals {
     Environment = "test"
     GithubRepo  = "terraform-aws-eks"
     GithubOrg   = "terraform-aws-modules"
-    "${var.consul_cluster_tag_key}" = "${var.consul_cluster_name}"
   }
 }
 
@@ -173,4 +172,7 @@ module "eks" {
   map_users_count                      = "${var.map_users_count}"
   map_accounts                         = "${var.map_accounts}"
   map_accounts_count                   = "${var.map_accounts_count}"
+  tags = {
+        "${var.consul_cluster_tag_key}" = "${var.consul_cluster_name}"
+    }
 }
